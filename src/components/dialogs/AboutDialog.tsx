@@ -71,16 +71,6 @@ export function AboutDialog({
             {metadata.creator.name}
           </a>
         </p>
-        <p>
-          <a
-            href={metadata.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-          >
-            Open in GitHub
-          </a>
-        </p>
       </div>
     </div>
   );
