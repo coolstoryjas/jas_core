@@ -63,13 +63,6 @@ export const appRegistry = {
       minSize: { width: 400, height: 300 },
     } as WindowConstraints,
   },
-  [ChatsApp.id]: {
-    ...ChatsApp,
-    windowConfig: {
-      defaultSize: { width: 560, height: 360 },
-      minSize: { width: 300, height: 320 },
-    } as WindowConstraints,
-  },
   [TextEditApp.id]: {
     ...TextEditApp,
     windowConfig: {
@@ -128,13 +121,6 @@ export const appRegistry = {
       defaultSize: { width: 645, height: 511 },
       minSize: { width: 645, height: 511 },
       maxSize: { width: 645, height: 511 },
-    } as WindowConstraints,
-  },
-  [TerminalApp.id]: {
-    ...TerminalApp,
-    windowConfig: {
-      defaultSize: { width: 600, height: 400 },
-      minSize: { width: 400, height: 300 },
     } as WindowConstraints,
   },
   [ControlPanelsApp.id]: {
