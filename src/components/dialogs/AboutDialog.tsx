@@ -59,17 +59,6 @@ export function AboutDialog({
           {metadata.name}
         </div>
         <p className="text-gray-500 mb-2">Version {metadata.version}</p>
-        <p>
-          Made by{" "}
-          <a
-            href={metadata.creator.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-          >
-            {metadata.creator.name}
-          </a>
-        </p>
       </div>
     </div>
   );
