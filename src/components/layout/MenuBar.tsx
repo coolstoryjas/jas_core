@@ -361,17 +361,6 @@ function DefaultMenuItems() {
             Music
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => handleLaunchFinder("/Sites")}
-            className="text-md h-6 px-3 active:bg-gray-900 active:text-white flex items-center gap-2"
-          >
-            <ThemedIcon
-              name="sites.png"
-              alt="Sites"
-              className="w-4 h-4 [image-rendering:pixelated]"
-            />
-            Sites
-          </DropdownMenuItem>
-          <DropdownMenuItem
             onClick={() => handleLaunchFinder("/Videos")}
             className="text-md h-6 px-3 active:bg-gray-900 active:text-white flex items-center gap-2"
           >
