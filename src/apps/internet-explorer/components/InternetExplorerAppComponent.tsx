@@ -31,9 +31,7 @@ import { HelpDialog } from "@/components/dialogs/HelpDialog";
 import { AboutDialog } from "@/components/dialogs/AboutDialog";
 import { ConfirmDialog } from "@/components/dialogs/ConfirmDialog";
 import { appMetadata } from "..";
-import HtmlPreview from "@/components/shared/HtmlPreview";
 import { motion, AnimatePresence } from "framer-motion";
-import { useAiGeneration } from "../hooks/useAiGeneration";
 import {
   useInternetExplorerStore,
   DEFAULT_FAVORITES,
@@ -343,7 +341,6 @@ export function InternetExplorerAppComponent({
     timelineSettings,
     status,
     finalUrl,
-    aiGeneratedHtml,
     errorDetails,
     isResetFavoritesDialogOpen,
     isFutureSettingsDialogOpen,
@@ -864,53 +861,50 @@ export function InternetExplorerAppComponent({
   };
 
   const handleNavigate = useCallback(
-    async (
-      targetUrlParam: string = localUrl || url,
-      targetYearParam: string = year,
-      forceRegenerate = false,
-      currentHtmlContent: string | null = null
-    ) => {
-      clearErrorDetails();
+  async (
+    targetUrlParam: string = localUrl || url,
+    targetYearParam: string = year
+  ) => {
+    clearErrorDetails();
 
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-      const abortController = new AbortController();
-      abortControllerRef.current = abortController;
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    const abortController = new AbortController();
+    abortControllerRef.current = abortController;
 
-      if (isAiLoading) {
-        stopGeneration();
-      }
-      if (iframeRef.current && status === "loading") {
-        iframeRef.current.src = "about:blank";
-      }
+    if (iframeRef.current && status === "loading") {
+      iframeRef.current.src = "about:blank";
+    }
 
-      const newMode =
-        targetYearParam === "current"
-          ? "now"
-          : parseInt(targetYearParam) > new Date().getFullYear()
-          ? "future"
-          : "past";
-      const newToken = Date.now();
+    // Always use Wayback Machine for all years
+    let normalizedTargetUrl = targetUrlParam.startsWith("http")
+      ? targetUrlParam
+      : `https://${targetUrlParam}`;
 
-      // --- Trim the URL from input before navigating ---
-      // Use targetUrlParam directly as it's passed in, or trim the current store url if not passed
-      const urlToNavigate = (
-        targetUrlParam === url ? url.trim() : targetUrlParam
-      ).trim();
-      // Update store immediately so the input reflects the trimmed URL during loading
-      setUrl(urlToNavigate);
-      // --- End Trim ---
+    // If year is "current" or invalid/future, use latest Wayback snapshot
+    let waybackYear = targetYearParam;
+    if (
+      waybackYear === "current" ||
+      isNaN(Number(waybackYear)) ||
+      Number(waybackYear) > new Date().getFullYear()
+    ) {
+      waybackYear = ""; // Wayback will use latest if no year is given
+    }
 
-      // Store the latest token immediately so that asynchronous iframe load/error
-      // handlers fired before the next React render can still validate correctly.
-      navTokenRef.current = newToken;
+    // Use your proxy endpoint
+    const waybackUrl = `/api/iframe-check?url=${encodeURIComponent(
+      normalizedTargetUrl
+    )}&year=${waybackYear}`;
 
-      track(IE_ANALYTICS.NAVIGATION_START, {
-        url: urlToNavigate,
-        year: targetYearParam,
-        mode: newMode,
-      });
+    setFinalUrl(waybackUrl);
+
+    if (iframeRef.current) {
+      iframeRef.current.src = waybackUrl;
+    }
+  },
+  [localUrl, url, year, status, setFinalUrl, clearErrorDetails]
+);
 
       navigateStart(urlToNavigate, targetYearParam, newMode, newToken);
 
@@ -2492,30 +2486,6 @@ export function InternetExplorerAppComponent({
             <div className="flex-1 relative bg-white">
               {errorDetails ? (
                 renderErrorPage()
-              ) : isFutureYear ||
-                (mode === "past" &&
-                  (isAiLoading || aiGeneratedHtml !== null)) ? (
-                <div className="w-full h-full overflow-hidden absolute inset-0 font-geneva-12">
-                  <HtmlPreview
-                    htmlContent={
-                      isAiLoading ? generatedHtml || "" : aiGeneratedHtml || ""
-                    }
-                    onInteractionChange={() => {}}
-                    className="border-none"
-                    maxHeight="none"
-                    minHeight="100%"
-                    initialFullScreen={false}
-                    isInternetExplorer={true}
-                    isStreaming={
-                      isAiLoading && generatedHtml !== aiGeneratedHtml
-                    }
-                    playElevatorMusic={playElevatorMusic}
-                    stopElevatorMusic={stopElevatorMusic}
-                    playDingSound={playDingSound}
-                    baseUrlForAiContent={url}
-                    mode={mode}
-                  />
-                </div>
               ) : (
                 <iframe
                   ref={iframeRef}
@@ -2524,7 +2494,7 @@ export function InternetExplorerAppComponent({
                   onLoad={handleIframeLoad}
                   onError={handleIframeError}
                 />
-              )}
+               )}
 
               {!isForeground && (
                 <div
