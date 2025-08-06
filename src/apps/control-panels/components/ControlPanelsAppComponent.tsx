@@ -1947,108 +1947,107 @@ export function ControlPanelsAppComponent({
         </div>
 
         <HelpDialog
-          isOpen={isHelpDialogOpen}
-          onOpenChange={setIsHelpDialogOpen}
-          helpItems={helpItems}
-          appName="Control Panels"
-        />
-        <AboutDialog
-          isOpen={isAboutDialogOpen}
-          onOpenChange={setIsAboutDialogOpen}
-          metadata={appMetadata}
-        />
-        <ConfirmDialog
-          isOpen={isConfirmResetOpen}
-          onOpenChange={setIsConfirmResetOpen}
-          onConfirm={handleConfirmReset}
-          title="Reset All Settings"
-          description="Are you sure you want to reset all settings? This will clear all saved settings and restore default states. ryOS will restart after reset."
-        />
-        <ConfirmDialog
-          isOpen={isConfirmFormatOpen}
-          onOpenChange={setIsConfirmFormatOpen}
-          onConfirm={handleConfirmFormat}
-          title="Format File System"
-          description="Are you sure you want to format the file system? This will permanently delete all documents (except sample documents), images, and custom wallpapers. ryOS will restart after format."
-        />
-        {/* Sign Up Dialog (was SetUsernameDialog) */}
-        <LoginDialog
-          initialTab="signup"
-          isOpen={isUsernameDialogOpen}
-          onOpenChange={setIsUsernameDialogOpen}
-          /* Login props (inactive) */
-          usernameInput={verifyUsernameInput}
-          onUsernameInputChange={setVerifyUsernameInput}
-          passwordInput={verifyPasswordInput}
-          onPasswordInputChange={setVerifyPasswordInput}
-          onLoginSubmit={async () => {
-            await handleVerifyTokenSubmit(verifyPasswordInput, true);
-          }}
-          isLoginLoading={isVerifyingToken}
-          loginError={verifyError}
-          /* Sign Up props */
-          newUsername={newUsername}
-          onNewUsernameChange={setNewUsername}
-          newPassword={newPassword}
-          onNewPasswordChange={setNewPassword}
-          onSignUpSubmit={submitUsernameDialog}
-          isSignUpLoading={isSettingUsername}
-          signUpError={usernameError}
-        />
+  isOpen={isHelpDialogOpen}
+  onOpenChange={setIsHelpDialogOpen}
+  helpItems={helpItems}
+  appName="Control Panels"
+/>
+<AboutDialog
+  isOpen={isAboutDialogOpen}
+  onOpenChange={setIsAboutDialogOpen}
+  metadata={appMetadata}
+/>
+<ConfirmDialog
+  isOpen={isConfirmResetOpen}
+  onOpenChange={setIsConfirmResetOpen}
+  onConfirm={handleConfirmReset}
+  title="Reset All Settings"
+  description="Are you sure you want to reset all settings? This will clear all saved settings and restore default states. ryOS will restart after reset."
+/>
+<ConfirmDialog
+  isOpen={isConfirmFormatOpen}
+  onOpenChange={setIsConfirmFormatOpen}
+  onConfirm={handleConfirmFormat}
+  title="Format File System"
+  description="Are you sure you want to format the file system? This will permanently delete all documents (except sample documents), images, and custom wallpapers. ryOS will restart after format."
+/>
 
-        {/* Log In Dialog */}
-        <LoginDialog
-          isOpen={isVerifyDialogOpen}
-          onOpenChange={setVerifyDialogOpen}
-          /* Login props */
-          usernameInput={verifyUsernameInput}
-          onUsernameInputChange={setVerifyUsernameInput}
-          passwordInput={verifyPasswordInput}
-          onPasswordInputChange={setVerifyPasswordInput}
-          onLoginSubmit={async () => {
-            await handleVerifyTokenSubmit(verifyPasswordInput, true);
-          }}
-          isLoginLoading={isVerifyingToken}
-          loginError={verifyError}
-          /* Sign Up props (inactive) */
-          newUsername={verifyUsernameInput}
-          onNewUsernameChange={setVerifyUsernameInput}
-          newPassword={verifyPasswordInput}
-          onNewPasswordChange={setVerifyPasswordInput}
-          onSignUpSubmit={async () => {
-            setVerifyDialogOpen(false);
-            promptSetUsername();
-          }}
-          isSignUpLoading={false}
-          signUpError={null}
-        />
-        <InputDialog
-          isOpen={isPasswordDialogOpen}
-          onOpenChange={setIsPasswordDialogOpen}
-          onSubmit={handleSetPassword}
-          title="Set Password"
-          description="Set a password to enable account recovery. You can use this password to get a new token if you lose access."
-          value={passwordInput}
-          onChange={(value) => {
-            setPasswordInput(value);
-            setPasswordError(null);
-          }}
-          isLoading={isSettingPassword}
-          errorMessage={passwordError}
-          submitLabel="Set Password"
-        />
-        <LogoutDialog
-          isOpen={isLogoutConfirmDialogOpen}
-          onOpenChange={setIsLogoutConfirmDialogOpen}
-          onConfirm={confirmLogout}
-          hasPassword={hasPassword}
-          onSetPassword={() => {
-            setPasswordInput("");
-            setPasswordError(null);
-            setIsPasswordDialogOpen(true);
-          }}
-        />
-      </WindowFrame>
-    </>
-  );
-}
+{/* --- LOGIN + SIGNUP DIALOGS (Currently Disabled) --- */}
+{/*
+<LoginDialog
+  initialTab="signup"
+  isOpen={isUsernameDialogOpen}
+  onOpenChange={setIsUsernameDialogOpen}
+  // Login props (inactive)
+  usernameInput={verifyUsernameInput}
+  onUsernameInputChange={setVerifyUsernameInput}
+  passwordInput={verifyPasswordInput}
+  onPasswordInputChange={setVerifyPasswordInput}
+  onLoginSubmit={async () => {
+    await handleVerifyTokenSubmit(verifyPasswordInput, true);
+  }}
+  isLoginLoading={isVerifyingToken}
+  loginError={verifyError}
+  // Sign Up props
+  newUsername={newUsername}
+  onNewUsernameChange={setNewUsername}
+  newPassword={newPassword}
+  onNewPasswordChange={setNewPassword}
+  onSignUpSubmit={submitUsernameDialog}
+  isSignUpLoading={isSettingUsername}
+  signUpError={usernameError}
+/>
+
+<LoginDialog
+  isOpen={isVerifyDialogOpen}
+  onOpenChange={setVerifyDialogOpen}
+  // Login props
+  usernameInput={verifyUsernameInput}
+  onUsernameInputChange={setVerifyUsernameInput}
+  passwordInput={verifyPasswordInput}
+  onPasswordInputChange={setVerifyPasswordInput}
+  onLoginSubmit={async () => {
+    await handleVerifyTokenSubmit(verifyPasswordInput, true);
+  }}
+  isLoginLoading={isVerifyingToken}
+  loginError={verifyError}
+  // Sign Up props (inactive)
+  newUsername={verifyUsernameInput}
+  onNewUsernameChange={setVerifyUsernameInput}
+  newPassword={verifyPasswordInput}
+  onNewPasswordChange={setVerifyPasswordInput}
+  onSignUpSubmit={async () => {
+    setVerifyDialogOpen(false);
+    promptSetUsername();
+  }}
+  isSignUpLoading={false}
+  signUpError={null}
+/>
+*/}
+
+<InputDialog
+  isOpen={isPasswordDialogOpen}
+  onOpenChange={setIsPasswordDialogOpen}
+  onSubmit={handleSetPassword}
+  title="Set Password"
+  description="Set a password to enable account recovery. You can use this password to get a new token if you lose access."
+  value={passwordInput}
+  onChange={(value) => {
+    setPasswordInput(value);
+    setPasswordError(null);
+  }}
+  isLoading={isSettingPassword}
+  errorMessage={passwordError}
+  submitLabel="Set Password"
+/>
+<LogoutDialog
+  isOpen={isLogoutConfirmDialogOpen}
+  onOpenChange={setIsLogoutConfirmDialogOpen}
+  onConfirm={confirmLogout}
+  hasPassword={hasPassword}
+  onSetPassword={() => {
+    setPasswordInput("");
+    setPasswordError(null);
+    setIsPasswordDialogOpen(true);
+  }}
+/>
