@@ -13,7 +13,6 @@ import { appIds } from "./appIds";
 import type {
   BaseApp,
   ControlPanelsInitialData,
-  InternetExplorerInitialData,
   IpodInitialData,
   PaintInitialData,
   VideosInitialData,
