@@ -17,6 +17,7 @@ interface AboutDialogProps {
     version: string;
     creator: {
       name: string;
+      url: string;
     };
     icon: string;
   };
