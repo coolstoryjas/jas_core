@@ -19,7 +19,6 @@ interface AboutDialogProps {
       name: string;
       url: string;
     };
-    github: string;
     icon: string;
   };
 }
