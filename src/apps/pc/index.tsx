@@ -4,6 +4,12 @@ import { PcAppComponent } from "./components/PcAppComponent";
 export const appMetadata = {
   name: "Virtual PC",
   version: "1.0.0",
+   creator: {
+    name: " ",
+    url: " ",
+  },
+  github: "https://github.com/ryokun6/ryos",
+  icon: "/icons/default/pc.png",
 };
 
 export const helpItems = [
