@@ -1973,12 +1973,11 @@ export function ControlPanelsAppComponent({
 />
 
 {/* --- LOGIN + SIGNUP DIALOGS (Currently Disabled) --- */}
-{/*
+{/* 
 <LoginDialog
   initialTab="signup"
   isOpen={isUsernameDialogOpen}
   onOpenChange={setIsUsernameDialogOpen}
-  // Login props (inactive)
   usernameInput={verifyUsernameInput}
   onUsernameInputChange={setVerifyUsernameInput}
   passwordInput={verifyPasswordInput}
@@ -1988,7 +1987,6 @@ export function ControlPanelsAppComponent({
   }}
   isLoginLoading={isVerifyingToken}
   loginError={verifyError}
-  // Sign Up props
   newUsername={newUsername}
   onNewUsernameChange={setNewUsername}
   newPassword={newPassword}
@@ -2001,7 +1999,6 @@ export function ControlPanelsAppComponent({
 <LoginDialog
   isOpen={isVerifyDialogOpen}
   onOpenChange={setVerifyDialogOpen}
-  // Login props
   usernameInput={verifyUsernameInput}
   onUsernameInputChange={setVerifyUsernameInput}
   passwordInput={verifyPasswordInput}
@@ -2011,7 +2008,6 @@ export function ControlPanelsAppComponent({
   }}
   isLoginLoading={isVerifyingToken}
   loginError={verifyError}
-  // Sign Up props (inactive)
   newUsername={verifyUsernameInput}
   onNewUsernameChange={setVerifyUsernameInput}
   newPassword={verifyPasswordInput}
@@ -2051,3 +2047,5 @@ export function ControlPanelsAppComponent({
     setIsPasswordDialogOpen(true);
   }}
 />
+</WindowFrame>
+</>
