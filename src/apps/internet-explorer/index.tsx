@@ -44,8 +44,8 @@ export const appMetadata = {
   version: "1.02",
   name: "Internet Explorer",
   creator: {
-    name: "Ryo Lu",
-    url: "https://ryo.lu",
+    name: "JasCore",
+    url: " ",
   },
   github: "https://github.com/ryokun6/ryos",
   icon: "/icons/default/ie.png",
