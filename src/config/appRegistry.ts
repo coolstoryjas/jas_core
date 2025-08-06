@@ -1,6 +1,5 @@
 import { TextEditApp } from "@/apps/textedit";
 import { InternetExplorerApp } from "@/apps/internet-explorer";
-import { ChatsApp } from "@/apps/chats";
 import ControlPanelsApp from "@/apps/control-panels";
 import { MinesweeperApp } from "@/apps/minesweeper";
 import { SoundboardApp } from "@/apps/soundboard";
@@ -11,7 +10,6 @@ import { PcApp } from "@/apps/pc";
 import { PhotoBoothApp } from "@/apps/photo-booth";
 import { SynthApp } from "@/apps/synth";
 import { IpodApp } from "@/apps/ipod";
-import { TerminalApp } from "@/apps/terminal";
 import { appIds } from "./appIds";
 import type {
   BaseApp,
