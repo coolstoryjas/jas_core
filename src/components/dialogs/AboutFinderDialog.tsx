@@ -82,7 +82,7 @@ export function AboutFinderDialog({
                     : "font-apple-garamond text-2xl"
                 )}
               >
-                ryOS
+                JasCore
                 {currentTheme === "system7"
                   ? " 7"
                   : currentTheme === "macosx"
