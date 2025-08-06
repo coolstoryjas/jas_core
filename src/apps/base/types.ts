@@ -23,7 +23,6 @@ export interface BaseApp<TInitialData = unknown> {
   id:
     | "soundboard"
     | "internet-explorer"
-    | "chats"
     | "textedit"
     | "control-panels"
     | "minesweeper"
@@ -33,8 +32,7 @@ export interface BaseApp<TInitialData = unknown> {
     | "pc"
     | "photo-booth"
     | "synth"
-    | "ipod"
-    | "terminal";
+    | "ipod";
   name: string;
   icon: string | { type: "image"; src: string };
   description: string;
