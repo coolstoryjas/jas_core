@@ -1,5 +1,4 @@
 import { TextEditApp } from "@/apps/textedit";
-import { InternetExplorerApp } from "@/apps/internet-explorer";
 import ControlPanelsApp from "@/apps/control-panels";
 import { MinesweeperApp } from "@/apps/minesweeper";
 import { SoundboardApp } from "@/apps/soundboard";
@@ -54,13 +53,6 @@ export const appRegistry = {
     windowConfig: {
       defaultSize: { width: 650, height: 475 },
       minSize: { width: 550, height: 375 },
-    } as WindowConstraints,
-  },
-  [InternetExplorerApp.id]: {
-    ...(InternetExplorerApp as BaseApp<InternetExplorerInitialData>),
-    windowConfig: {
-      defaultSize: { width: 730, height: 600 },
-      minSize: { width: 400, height: 300 },
     } as WindowConstraints,
   },
   [TextEditApp.id]: {
