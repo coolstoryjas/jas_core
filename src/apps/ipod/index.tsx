@@ -18,11 +18,6 @@ export const helpItems = [
     description: "Play, pause, skip tracks, and control your current song.",
   },
   {
-    icon: "🎤",
-    title: "Synced Lyrics",
-    description: "View time-synced lyrics and get instant translations.",
-  },
-  {
     icon: "⚙️",
     title: "Playback Modes",
     description: "Enable shuffle, repeat songs or playlists, and more.",
