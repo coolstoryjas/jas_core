@@ -49,10 +49,10 @@ const finderMetadata = {
   name: "Finder",
   version: "1.0.0",
   creator: {
-    name: "Ryo Lu",
-    url: "https://ryo.lu",
+    name: "JasCore",
+    url: "coolstoryjas.vercel.app",
   },
-  github: "https://github.com/ryokun6/ryos",
+  github: "https://github.com/coolstoryjas",
   icon: "/icons/mac.png",
 };
 
