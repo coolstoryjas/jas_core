@@ -128,7 +128,7 @@ export function AboutFinderDialog({
                       : undefined,
                   }}
                 >
-                  © Ryo Lu. 1992-{new Date().getFullYear()}
+                  JasCore. 1992-{new Date().getFullYear()}
                 </div>
               </div>
             </div>
