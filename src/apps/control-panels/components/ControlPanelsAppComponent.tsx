@@ -1973,52 +1973,54 @@ export function ControlPanelsAppComponent({
 />
 
 {/* --- LOGIN + SIGNUP DIALOGS (Currently Disabled) --- */}
-{/* 
-<LoginDialog
-  initialTab="signup"
-  isOpen={isUsernameDialogOpen}
-  onOpenChange={setIsUsernameDialogOpen}
-  usernameInput={verifyUsernameInput}
-  onUsernameInputChange={setVerifyUsernameInput}
-  passwordInput={verifyPasswordInput}
-  onPasswordInputChange={setVerifyPasswordInput}
-  onLoginSubmit={async () => {
-    await handleVerifyTokenSubmit(verifyPasswordInput, true);
-  }}
-  isLoginLoading={isVerifyingToken}
-  loginError={verifyError}
-  newUsername={newUsername}
-  onNewUsernameChange={setNewUsername}
-  newPassword={newPassword}
-  onNewPasswordChange={setNewPassword}
-  onSignUpSubmit={submitUsernameDialog}
-  isSignUpLoading={isSettingUsername}
-  signUpError={usernameError}
-/>
+{/*
+<>
+  <LoginDialog
+    initialTab="signup"
+    isOpen={isUsernameDialogOpen}
+    onOpenChange={setIsUsernameDialogOpen}
+    usernameInput={verifyUsernameInput}
+    onUsernameInputChange={setVerifyUsernameInput}
+    passwordInput={verifyPasswordInput}
+    onPasswordInputChange={setVerifyPasswordInput}
+    onLoginSubmit={async () => {
+      await handleVerifyTokenSubmit(verifyPasswordInput, true);
+    }}
+    isLoginLoading={isVerifyingToken}
+    loginError={verifyError}
+    newUsername={newUsername}
+    onNewUsernameChange={setNewUsername}
+    newPassword={newPassword}
+    onNewPasswordChange={setNewPassword}
+    onSignUpSubmit={submitUsernameDialog}
+    isSignUpLoading={isSettingUsername}
+    signUpError={usernameError}
+  />
 
-<LoginDialog
-  isOpen={isVerifyDialogOpen}
-  onOpenChange={setVerifyDialogOpen}
-  usernameInput={verifyUsernameInput}
-  onUsernameInputChange={setVerifyUsernameInput}
-  passwordInput={verifyPasswordInput}
-  onPasswordInputChange={setVerifyPasswordInput}
-  onLoginSubmit={async () => {
-    await handleVerifyTokenSubmit(verifyPasswordInput, true);
-  }}
-  isLoginLoading={isVerifyingToken}
-  loginError={verifyError}
-  newUsername={verifyUsernameInput}
-  onNewUsernameChange={setVerifyUsernameInput}
-  newPassword={verifyPasswordInput}
-  onNewPasswordChange={setVerifyPasswordInput}
-  onSignUpSubmit={async () => {
-    setVerifyDialogOpen(false);
-    promptSetUsername();
-  }}
-  isSignUpLoading={false}
-  signUpError={null}
-/>
+  <LoginDialog
+    isOpen={isVerifyDialogOpen}
+    onOpenChange={setVerifyDialogOpen}
+    usernameInput={verifyUsernameInput}
+    onUsernameInputChange={setVerifyUsernameInput}
+    passwordInput={verifyPasswordInput}
+    onPasswordInputChange={setVerifyPasswordInput}
+    onLoginSubmit={async () => {
+      await handleVerifyTokenSubmit(verifyPasswordInput, true);
+    }}
+    isLoginLoading={isVerifyingToken}
+    loginError={verifyError}
+    newUsername={verifyUsernameInput}
+    onNewUsernameChange={setVerifyUsernameInput}
+    newPassword={verifyPasswordInput}
+    onNewPasswordChange={setVerifyPasswordInput}
+    onSignUpSubmit={async () => {
+      setVerifyDialogOpen(false);
+      promptSetUsername();
+    }}
+    isSignUpLoading={false}
+    signUpError={null}
+  />
+</>
 */}
 
 <InputDialog
@@ -2049,3 +2051,4 @@ export function ControlPanelsAppComponent({
 />
 </WindowFrame>
 </>
+
