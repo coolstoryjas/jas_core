@@ -1974,7 +1974,6 @@ export function ControlPanelsAppComponent({
 
 {/* --- LOGIN + SIGNUP DIALOGS (Currently Disabled) --- */}
 {/*
-<>
   <LoginDialog
     initialTab="signup"
     isOpen={isUsernameDialogOpen}
@@ -2020,7 +2019,6 @@ export function ControlPanelsAppComponent({
     isSignUpLoading={false}
     signUpError={null}
   />
-</>
 */}
 
 <InputDialog
