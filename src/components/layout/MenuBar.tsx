@@ -50,7 +50,7 @@ const finderMetadata = {
   version: "1.0.0",
   creator: {
     name: "JasCore",
-    url: "coolstoryjas.vercel.app",
+    url: "https://github.com/coolstoryjas ",
   },
   github: "https://github.com/coolstoryjas",
   icon: "/icons/mac.png",
