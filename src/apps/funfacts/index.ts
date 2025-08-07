@@ -32,11 +32,11 @@ export const appMetadata = {
     url: " ",
   },
   github: "https://github.com",
-  icon: "/icons/default/fun-facts.png",
+  icon: "/icons/default/funfacts.png",
 };
 
 export const FunFactsApp: BaseApp = {
-  id: "fun-facts",
+  id: "funfacts",
   name: "Fun Facts",
   icon: { type: "image", src: appMetadata.icon },
   description: "Discover interesting personal facts and stories in a fun, interactive way",
