@@ -1,7 +1,7 @@
 {
-  "name": "ryOS",
-  "short_name": "ryOS",
-  "description": "A web-based OS experience, made with Cursor",
+  "name": "JasCore",
+  "short_name": "JasCore",
+  "description": "A web-based OS experience.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
