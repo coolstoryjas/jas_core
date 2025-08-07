@@ -99,11 +99,11 @@ export function FunFactsAppComponent({
   // Category color mapping
   const getCategoryColor = (category: string) => {
     const colors = {
-      technology: "bg-blue-50",
-      reading: "bg-green-50",
-      hobbies: "bg-purple-50",
+      ai: "bg-blue-50",
+      identity: "bg-green-50",
+      creative: "bg-purple-50",
       travel: "bg-orange-50",
-      lifestyle: "bg-pink-50",
+      technology: "bg-pink-50",
       philosophy: "bg-yellow-50",
     };
     return colors[category as keyof typeof colors] || "bg-gray-50";
