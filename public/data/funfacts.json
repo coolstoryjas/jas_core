@@ -6,70 +6,56 @@
       "title": "My Human Design Type",
       "content": "My human design type outlines how I operate best. I'm built for big-picture strategy, deep dives, and waiting for the right invites.",
       "category": "identity",
-      "icon": " "
+      "icon": "🌀"
     },
     {
-      "id": "first-dslr",
-      "title": "My first DSLR camera",
-      "content": "Nikon D810 - I liked the image quality from that 36MP sensor. The lack of an anti-aliasing filter made the photos noticeably sharper, which suited my preference for detail.",
-      "category": "photography",
-      "icon": "📷"
+      "id": "astrology",
+      "title": "Nakshatras I’m Obsessed With",
+      "content": "Dhanishta + Purva Bhadrapada — both major players in my chart and constant sources of fascination.",
+      "category": "identity",
+      "icon": "🧬"
     },
     {
-      "id": "recent-camera",
-      "title": "My recent camera purchase",
-      "content": "Fujifilm X-T4 - I switched because I got tired of carrying heavy gear. The film simulations are convenient for getting that film look without the hassle of actual film.",
-      "category": "photography",
-      "icon": "📸"
-    },
-    {
-      "id": "first-computer",
-      "title": "My first computer",
-      "content": "HP desktop with Pentium 4 - I spent a lot of time exploring Windows, breaking things, and figuring out how to fix them. That's probably where I learned to enjoy troubleshooting.",
-      "category": "technology",
-      "icon": "💻"
-    },
-    {
-      "id": "first-video-game",
-      "title": "My first video game",
-      "content": "Super Mario Bros. on Nintendo - I can still remember the theme song. Those simple 8-bit graphics somehow created more lasting memories than today's complex games.",
-      "category": "gaming",
-      "icon": "🎮"
-    },
-    {
-      "id": "longest-hike",
-      "title": "My longest hiking adventure",
-      "content": "Coloane Island trail in Macau - I went expecting just a walk, but ended up spending more time there than planned. The coastline views were worth the extra time.",
-      "category": "travel",
-      "icon": "🥾"
-    },
-    {
-      "id": "favorite-ai-tool",
-      "title": "My recent AI agent product",
-      "content": "Claude Code by Anthropic - I'm drawn to its CLI interface. As a geek, there's something irresistible about having an AI assistant that lives directly in the terminal where I spend most of my time.",
-      "category": "technology",
+      "id": "ai-moment",
+      "title": "Weirdest AI Moment",
+      "content": "Once, while building a wireframe, AI snuck in a hidden link that… Rick Rolled me. No prompt. No setup. Just chaos.",
+      "category": "ai",
       "icon": "🤖"
     },
     {
-      "id": "investment-guru",
-      "title": "My favorite investment guru",
-      "content": "Howard Marks from Oaktree Capital - I appreciate his investment memos because they focus on risk management rather than just chasing returns. His approach to market cycles makes more sense to me than most gurus.",
-      "category": "philosophy",
-      "icon": "📈"
+      "id": "rent-free",
+      "title": "Idea Living Rent-Free in My Head",
+      "content": "An AI-generated music video for a song I love. Been sitting on it for a year. Still want to make it happen — maybe with the right collab.",
+      "category": "creative",
+      "icon": "✨"
     },
     {
-      "id": "favorite-podcast",
-      "title": "My favorite podcast",
-      "content": "知行小酒馆 by 有知有行 - I like how they discuss investment but focus more on life philosophy. The idea that investment success comes from becoming a better person resonates with me.",
-      "category": "lifestyle",
-      "icon": "🎧"
+      "id": "unlearn",
+      "title": "Something We Should All Unlearn",
+      "content": "That creativity only counts if you’re doing it a certain way. It comes in a thousand forms and most of them outside the box people imagine.",
+      "category": "creative",
+      "icon": "🔮"
     },
     {
-      "id": "favorite-football-team",
-      "title": "My favorite football team",
-      "content": "Juventus FC - I started supporting them after playing FIFA 06, where they seemed like the strongest team in the game. Been following 'la Vecchia Signora' ever since.",
-      "category": "hobbies",
-      "icon": "⚽"
+      "id": "ai-crush",
+      "title": "Current AI Crush",
+      "content": "v0. I used to do front-end dev, and this feels like coming home — but with more freedom, more control, and much faster prototyping.",
+      "category": "ai",
+      "icon": " 🖥️ "
+    },
+    {
+      "id": "camera-bag",
+      "title": "In My Camera Bag",
+      "content": "My OG Fujifilm X-T2. It's my travel workhorse. Also the last Fuji camera fully made in Japan. I’ll probably never let it go.",
+      "category": "technology",
+      "icon": "📷"
+    },
+    {
+      "id": "favorite-instrument",
+      "title": "Favorite Instrument",
+      "content": "Violin. Played in a mariachi band for 10 years. Thinking about picking it up again...it taught me how to feel rhythm instead of overthinking it.",
+      "category": "creative",
+      "icon": "🎻"
     }
   ]
 }
