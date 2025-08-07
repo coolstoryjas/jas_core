@@ -9,8 +9,8 @@ import { PcApp } from "@/apps/pc";
 import { PhotoBoothApp } from "@/apps/photo-booth";
 import { SynthApp } from "@/apps/synth";
 import { IpodApp } from "@/apps/ipod";
-import { FunFactsApp } from "@/apps/funfacts";
 import { appIds } from "./appIds";
+import { FunFactsApp } from "@/apps/funfacts";
 import type {
   BaseApp,
   ControlPanelsInitialData,
