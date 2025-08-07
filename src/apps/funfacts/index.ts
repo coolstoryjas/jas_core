@@ -38,7 +38,7 @@ export const appMetadata = {
 export const FunFactsApp: BaseApp = {
   id: "funfacts",
   name: "Fun Facts",
-  icon: { type: "image", src: appMetadata.icon },
+  icon: { type: "image", src: "/icons/funfacts.png" },
   description: "Discover interesting personal facts and stories in a fun, interactive way",
   component: FunFactsAppComponent,
   helpItems,
