@@ -2,11 +2,11 @@
   "version": 1,
   "facts": [
     {
-      "id": "favorite-book",
-      "title": "The book I'm reading recently",
-      "content": "Reading 'Wanting' by Luke Burgis - it's making me think about whether my desires are actually my own or just copied from others. The mimetic desire concept is quite thought-provoking.",
-      "category": "reading",
-      "icon": "📚"
+      "id": "human-design",
+      "title": "My Human Design Type",
+      "content": "My human design type outlines how I operate best. I'm built for big-picture strategy, deep dives, and waiting for the right invites.",
+      "category": "identity",
+      "icon": " "
     },
     {
       "id": "first-dslr",
