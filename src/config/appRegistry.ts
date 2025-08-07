@@ -9,6 +9,7 @@ import { PcApp } from "@/apps/pc";
 import { PhotoBoothApp } from "@/apps/photo-booth";
 import { SynthApp } from "@/apps/synth";
 import { IpodApp } from "@/apps/ipod";
+import { FunFactsApp } from "@/apps/funfacts";
 import { appIds } from "./appIds";
 import type {
   BaseApp,
@@ -122,6 +123,13 @@ export const appRegistry = {
       maxSize: { width: 365, height: 600 },
     } as WindowConstraints,
   },
+  [FunFactsApp.id]: {
+    ...FunFactsApp,
+    windowConfig: {
+      defaultSize: { width: 650, height: 450 },
+      minSize: { width: 480, height: 350 },
+    } as WindowConstraints,
+   },
 } as const;
 
 // Helper function to get app icon path
