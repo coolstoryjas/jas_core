@@ -56,7 +56,7 @@ export function FunFactsAppComponent({
   useEffect(() => {
     const loadFacts = async () => {
       try {
-        const response = await fetch("/data/fun-facts.json");
+        const response = await fetch("/data/funfacts.json");
         const data: FunFactsData = await response.json();
         setFacts(data.facts);
         
@@ -122,7 +122,7 @@ export function FunFactsAppComponent({
         title="Fun Facts"
         onClose={onClose}
         isForeground={isForeground}
-        appId="fun-facts"
+        appId="funfacts"
         skipInitialSound={skipInitialSound}
         instanceId={instanceId}
         onNavigateNext={onNavigateNext}
