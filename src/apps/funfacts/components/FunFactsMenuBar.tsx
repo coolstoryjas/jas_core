@@ -37,7 +37,7 @@ export function FunFactsMenuBar({
         <DropdownMenuContent align="start" sideOffset={1} className="px-0">
           <DropdownMenuItem
             onSelect={async () => {
-              const appId = "fun-facts";
+              const appId = "funfacts";
               const shareUrl = generateAppShareUrl(appId);
               if (!shareUrl) return;
               try {
@@ -86,7 +86,7 @@ export function FunFactsMenuBar({
           </DropdownMenuItem>
           <DropdownMenuItem
             onSelect={async () => {
-              const appId = "fun-facts";
+              const appId = "funfacts";
               const shareUrl = generateAppShareUrl(appId);
               if (!shareUrl) return;
               try {
