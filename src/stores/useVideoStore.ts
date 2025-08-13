@@ -11,9 +11,9 @@ export interface Video {
 export const DEFAULT_VIDEOS: Video[] = [
   {
     id: "0pP3ZjMDzF4",
-    url: "https://youtu.be/0pP3ZjMDzF4",
-    title: "Make Something Wonderful",
-    artist: "Steve Jobs",
+    url: "https://youtu.be/pA6CGuXEKtQ",
+    title: "How Smart Contracts Will Change the World",
+    artist: "Olga Mack",
   },
   {
     id: "EKBVLzOZyLw",
