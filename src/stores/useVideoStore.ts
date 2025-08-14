@@ -17,9 +17,9 @@ export const DEFAULT_VIDEOS: Video[] = [
   },
   {
     id: "EKBVLzOZyLw",
-    url: "https://youtu.be/EKBVLzOZyLw",
-    title: "On Focus",
-    artist: "Jony Ive",
+    url: "https://youtu.be/envMzAxCRbw",
+    title: "A Love Letter to LA | Behind The Scenes",
+    artist: "CuCo",
   },
   {
     id: "wLb9g_8r-mE",
@@ -29,21 +29,21 @@ export const DEFAULT_VIDEOS: Video[] = [
   },
   {
     id: "3vq9p00T08I",
-    url: "https://youtu.be/3vq9p00T08I",
-    title: "Macintosh (1984)",
-    artist: "Apple Computer",
-  },
-  {
-    id: "2B-XwPjn9YY",
-    url: "https://youtu.be/2B-XwPjn9YY",
-    title: "Macintosh Introduction (1984)",
-    artist: "Steve Jobs",
-  },
-  {
-    id: "VFP-VZtgb0s",
     url: "https://youtu.be/srRI7yMjGz0",
     title: "Everything About Color in 25 Minutes",
     artist: "Juxtopposed",
+  },
+  {
+    id: "2B-XwPjn9YY",
+    url: "https://youtu.be/hxLaovoDgJk?si=fO1tpJc29spPRbIb",
+    title: "La Madrina Memory Fraud Ad",
+    artist: "Meow Wolf",
+  },
+  {
+    id: "VFP-VZtgb0s",
+    url: "https://youtu.be/3vq9p00T08I",
+    title: "Macintosh (1984)",
+    artist: "Apple Computer",
   },
   {
     id: "dtaSDVpAo4c",
@@ -53,9 +53,9 @@ export const DEFAULT_VIDEOS: Video[] = [
   },
   {
     id: "Ko4V3G4NqII",
-    url: "https://youtu.be/envMzAxCRbw",
-    title: "A Love Letter to LA | Behind The Scenes",
-    artist: "CuCo",
+    url: "https://youtu.be/QYw4UVzl84A",
+    title: "Omega Mart Employee Training Video",
+    artist: "Meow Wolf",
   },
   {
     id: "6-fkYFV7rOY",
@@ -107,15 +107,15 @@ export const DEFAULT_VIDEOS: Video[] = [
   },
   {
     id: "KEaLJpFxR9Q",
-    url: "https://youtu.be/QYw4UVzl84A",
-    title: "Omega Mart Employee Training Video",
-    artist: "Meow Wolf",
+    url: "https://youtu.be/EKBVLzOZyLw",
+    title: "On Focus",
+    artist: "Jony Ive",
   },
   {
     id: "b6-yFqenAy4",
-    url: "https://www.youtube.com/hxLaovoDgJk",
-    title: "La Madrina Memory Fraud Ad",
-    artist: "Meow Wolf",
+    url: "https://youtu.be/2B-XwPjn9YY",
+    title: "Macintosh Introduction (1984)",
+    artist: "Steve Jobs",
   },
 ];
 
