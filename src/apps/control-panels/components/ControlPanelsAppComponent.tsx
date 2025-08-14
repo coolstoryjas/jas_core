@@ -428,7 +428,7 @@ export function ControlPanelsAppComponent({
     // Preserve critical recovery keys while clearing everything else
     const fileMetadataStore = localStorage.getItem("ryos:files");
     const usernameRecovery = localStorage.getItem("_usr_recovery_key_");
-    the const authTokenRecovery = localStorage.getItem("_auth_recovery_key_");
+    const authTokenRecovery = localStorage.getItem("_auth_recovery_key_");
 
     clearAllAppStates();
 
