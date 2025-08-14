@@ -264,7 +264,7 @@ export function ControlPanelsAppComponent({
 
   // Use auth hook (left intact; UI removed)
   const {
-      // keep (used by dialogs)
+    // keep (used by dialogs)
     promptSetUsername,
     isUsernameDialogOpen,
     setIsUsernameDialogOpen,
@@ -276,7 +276,7 @@ export function ControlPanelsAppComponent({
     usernameError,
     submitUsernameDialog,
 
-      // login dialog
+    // login dialog
     isVerifyDialogOpen,
     setVerifyDialogOpen,
     verifyPasswordInput,
@@ -335,28 +335,7 @@ export function ControlPanelsAppComponent({
     setIsSettingPassword(false);
   };
 
-      const data = await response.json();
-
-      if (response.ok) {
-        toast.success("Logged Out", {
-          description: data.message || "Logged out from all devices",
-        });
-        confirmLogout();
-      } else {
-        toast.error("Logout Failed", {
-          description: data.error || "Failed to logout from all devices",
-        });
-      }
-    } catch (error) {
-      console.error("Error logging out all devices:", error);
-      toast.error("Network Error", {
-        description: "Failed to connect to server",
-      });
-    } finally {
-      setIsLoggingOutAllDevices(false);
-    }
-  };
-
+  // States for previous volume levels for mute/unmute functionality
   const [prevMasterVolume, setPrevMasterVolume] = useState(
     masterVolume > 0 ? masterVolume : 1
   );
@@ -371,6 +350,7 @@ export function ControlPanelsAppComponent({
     ipodVolume > 0 ? ipodVolume : 1
   );
 
+  // Detect iOS Safari – volume API does not work for YouTube embeds there
   const isIOS =
     typeof navigator !== "undefined" &&
     /iP(hone|od|ad)/.test(navigator.userAgent);
@@ -387,6 +367,7 @@ export function ControlPanelsAppComponent({
     setSynthPreset(value);
   };
 
+  // Mute toggle handlers
   const handleMasterMuteToggle = () => {
     if (masterVolume > 0) {
       setPrevMasterVolume(masterVolume);
@@ -444,9 +425,10 @@ export function ControlPanelsAppComponent({
   };
 
   const performReset = () => {
+    // Preserve critical recovery keys while clearing everything else
     const fileMetadataStore = localStorage.getItem("ryos:files");
     const usernameRecovery = localStorage.getItem("_usr_recovery_key_");
-    const authTokenRecovery = localStorage.getItem("_auth_recovery_key_");
+    the const authTokenRecovery = localStorage.getItem("_auth_recovery_key_");
 
     clearAllAppStates();
 
@@ -481,6 +463,7 @@ export function ControlPanelsAppComponent({
       version: 2,
     };
 
+    // Backup all localStorage data
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       if (key) {
@@ -498,17 +481,25 @@ export function ControlPanelsAppComponent({
             const transaction = db.transaction(storeName, "readonly");
             const store = transaction.objectStore(storeName);
             const items: StoreItemWithKey[] = [];
+
+            // Use openCursor to get both keys and values
             const request = store.openCursor();
+
             request.onsuccess = (event) => {
               const cursor = (event.target as IDBRequest<IDBCursorWithValue>)
                 .result;
               if (cursor) {
-                items.push({ key: cursor.key as string, value: cursor.value });
+                items.push({
+                  key: cursor.key as string,
+                  value: cursor.value,
+                });
                 cursor.continue();
               } else {
+                // No more entries
                 resolve(items);
               }
             };
+
             request.onerror = () => reject(request.error);
           } catch (error) {
             console.error(`Error accessing store ${storeName}:`, error);
@@ -528,6 +519,8 @@ export function ControlPanelsAppComponent({
         Promise.all(
           items.map(async (item) => {
             const serializedValue: Record<string, unknown> = { ...item.value };
+
+            // Check all fields for Blob instances
             for (const key of Object.keys(item.value)) {
               if (item.value[key] instanceof Blob) {
                 const base64 = await blobToBase64(item.value[key] as Blob);
@@ -535,7 +528,11 @@ export function ControlPanelsAppComponent({
                 serializedValue[`_isBlob_${key}`] = true;
               }
             }
-            return { key: item.key, value: serializedValue as StoreItem };
+
+            return {
+              key: item.key,
+              value: serializedValue as StoreItem,
+            };
           })
         );
 
@@ -549,16 +546,21 @@ export function ControlPanelsAppComponent({
       alert("Failed to backup file system data. Only settings will be backed up.");
     }
 
+    // Convert to JSON string
     const jsonString = JSON.stringify(backup);
 
+    // Create download with gzip compression
     try {
+      // Check if CompressionStream is available
       if (typeof CompressionStream === "undefined") {
         throw new Error("CompressionStream API not available in this browser");
       }
 
+      // Convert string to Uint8Array for compression
       const encoder = new TextEncoder();
       const inputData = encoder.encode(jsonString);
 
+      // Create a ReadableStream from the data
       const readableStream = new ReadableStream({
         start(controller) {
           controller.enqueue(inputData);
@@ -566,9 +568,11 @@ export function ControlPanelsAppComponent({
         },
       });
 
+      // Compress the stream
       const compressionStream = new CompressionStream("gzip");
       const compressedStream = readableStream.pipeThrough(compressionStream);
 
+      // Convert the compressed stream to a blob
       const chunks: Uint8Array[] = [];
       const reader = compressedStream.getReader();
 
@@ -578,8 +582,10 @@ export function ControlPanelsAppComponent({
         chunks.push(value);
       }
 
+      // Combine chunks into a single blob
       const compressedBlob = new Blob(chunks, { type: "application/gzip" });
 
+      // Create download link
       const url = URL.createObjectURL(compressedBlob);
       const a = document.createElement("a");
       a.href = url;
@@ -626,14 +632,21 @@ export function ControlPanelsAppComponent({
         if (file.name.endsWith(".gz")) {
           try {
             const arrayBuffer = e.target?.result as ArrayBuffer;
+
+            // Create a Response object with the compressed data
             const compressedResponse = new Response(arrayBuffer);
             const compressedStream = compressedResponse.body;
+
             if (!compressedStream) {
               throw new Error("Failed to create stream from compressed data");
             }
+
+            // Decompress the stream
             const decompressionStream = new DecompressionStream("gzip");
             const decompressedStream =
               compressedStream.pipeThrough(decompressionStream);
+
+            // Read the decompressed data
             const decompressedResponse = new Response(decompressedStream);
             data = await decompressedResponse.text();
           } catch (decompressionError) {
@@ -650,6 +663,7 @@ export function ControlPanelsAppComponent({
           data = e.target?.result as string;
         }
 
+        // Try to parse the JSON
         let backup;
         try {
           backup = JSON.parse(data);
@@ -659,21 +673,34 @@ export function ControlPanelsAppComponent({
           throw new Error("Invalid backup file format - not valid JSON");
         }
 
+        // Validate backup structure
         if (!backup || typeof backup !== "object") {
           throw new Error("Invalid backup structure - expected an object");
         }
 
+        console.log("Backup loaded successfully:", {
+          hasLocalStorage: !!backup.localStorage,
+          hasIndexedDB: !!backup.indexedDB,
+          version: backup.version,
+          timestamp: backup.timestamp,
+        });
+
+        // Detect if this is an old backup format
         let isOldBackupFormat = false;
+
+        // First check if backup has version field (new backups have version 2+)
         if (!backup.version || backup.version < 2) {
           isOldBackupFormat = true;
           console.log(
             "[Restore] Detected old backup format (no version or version < 2)"
           );
         } else if (backup.localStorage && backup.localStorage["ryos:files"]) {
+          // For newer backups, also check if files lack UUIDs
           try {
             const filesDataStr = backup.localStorage["ryos:files"];
             const filesData = filesDataStr ? JSON.parse(filesDataStr) : {};
             if (filesData.state && filesData.state.items) {
+              // Check if any files lack UUIDs
               const fileItems = (
                 Object.values(filesData.state.items) as Array<
                   Record<string, unknown>
@@ -714,6 +741,7 @@ export function ControlPanelsAppComponent({
           console.log(`Restored ${restoredCount} localStorage items`);
         }
 
+        // Track which files need UUID migration
         const fileUUIDMap = new Map<string, string>();
 
         if (backup.indexedDB) {
@@ -738,8 +766,10 @@ export function ControlPanelsAppComponent({
                         let restoredItem: Record<string, unknown>;
                         let itemKey: string | undefined;
 
+                        // Check if this is new format (with key) or old format (without key)
                         if ("value" in itemOrPair) {
                           const pair = itemOrPair as StoreItemWithKey;
+                          // New format: { key: string, value: StoreItem }
                           itemKey = pair.key;
                           restoredItem = { ...pair.value };
                         } else {
@@ -753,9 +783,10 @@ export function ControlPanelsAppComponent({
                           }
                         }
 
+                        // Check for fields that were Blobs and convert them back
                         for (const key of Object.keys(restoredItem)) {
                           if (key.startsWith("_isBlob_")) {
-                            const fieldName = key.substring(8);
+                            const fieldName = key.substring(8); // Remove '_isBlob_' prefix
                             if (
                               restoredItem[fieldName] &&
                               typeof restoredItem[fieldName] === "string"
@@ -764,7 +795,7 @@ export function ControlPanelsAppComponent({
                                 restoredItem[fieldName] as string
                               );
                             }
-                            delete restoredItem[key];
+                            delete restoredItem[key]; // Remove the metadata flag
                           }
                         }
 
@@ -777,6 +808,7 @@ export function ControlPanelsAppComponent({
                         }
 
                         await new Promise<void>((resolveItem, rejectItem) => {
+                          // Pass the key as the second parameter for stores without keyPath
                           const addRequest = store.put(restoredItem, itemKey);
                           addRequest.onsuccess = () => resolveItem();
                           addRequest.onerror = () => {
@@ -821,12 +853,15 @@ export function ControlPanelsAppComponent({
             );
           }
 
+          /* Synchronize files store metadata with IndexedDB content after restore */
           try {
             const db = await ensureIndexedDBInitialized();
             const persistedKey = "ryos:files";
             let raw = localStorage.getItem(persistedKey);
 
+            // Handle case where files store doesn't exist yet (very old backups)
             if (!raw) {
+              // Check if we have any content in IndexedDB to determine initial state
               const docsTransaction = db.transaction("documents", "readonly");
               const docsStore = docsTransaction.objectStore("documents");
               const docsCountRequest = docsStore.count();
@@ -853,9 +888,10 @@ export function ControlPanelsAppComponent({
               const defaultStore = {
                 state: {
                   items: {},
+                  // If we have content in IndexedDB, mark as loaded to prevent re-initialization
                   libraryState: hasContent ? "loaded" : "uninitialized",
                 },
-                version: 5,
+                version: 5, // Use current version
               };
               localStorage.setItem(persistedKey, JSON.stringify(defaultStore));
               raw = localStorage.getItem(persistedKey);
@@ -870,6 +906,7 @@ export function ControlPanelsAppComponent({
                 const items = parsed.state.items || {};
                 let hasChanges = false;
 
+                // Helper function to ensure metadata exists for a file
                 const ensureFileMetadata = (
                   path: string,
                   name: string,
@@ -877,6 +914,7 @@ export function ControlPanelsAppComponent({
                   icon: string,
                   existingUuid?: string
                 ) => {
+                  // Helper chooses a UUID to use: prefer existingUuid (from store key) then existing item uuid else generate new
                   let uuidToUse: string | undefined = existingUuid;
 
                   if (items[path]) {
@@ -888,6 +926,7 @@ export function ControlPanelsAppComponent({
                   }
 
                   if (!items[path]) {
+                    // Create new metadata entry
                     items[path] = {
                       path,
                       name,
@@ -902,6 +941,7 @@ export function ControlPanelsAppComponent({
                       `[Restore] Created metadata for ${path} with UUID ${uuidToUse}`
                     );
                   } else if (!items[path].uuid) {
+                    // Existing metadata without uuid
                     items[path].uuid = uuidToUse;
                     hasChanges = true;
                     console.log(
@@ -914,6 +954,7 @@ export function ControlPanelsAppComponent({
                   }
                 };
 
+                // Ensure default directories exist first
                 const defaultDirs = [
                   { path: "/", name: "/", type: "directory", icon: undefined },
                   {
@@ -977,6 +1018,7 @@ export function ControlPanelsAppComponent({
                   }
                 }
 
+                // Scan documents store and ensure metadata exists
                 await new Promise<void>((resolve) => {
                   const transaction = db.transaction("documents", "readonly");
                   const store = transaction.objectStore("documents");
@@ -1018,6 +1060,7 @@ export function ControlPanelsAppComponent({
                   };
                 });
 
+                // Scan images store and ensure metadata exists
                 await new Promise<void>((resolve) => {
                   const transaction = db.transaction("images", "readonly");
                   const store = transaction.objectStore("images");
@@ -1058,11 +1101,15 @@ export function ControlPanelsAppComponent({
                   };
                 });
 
+                // CRITICAL: Set library state based on whether we have any files
+                // For old backups without libraryState, if we have files (from IndexedDB or metadata),
+                // we should mark as "loaded" to prevent re-initialization
                 const hasFiles = Object.keys(items).some(
                   (path) => !items[path].isDirectory
                 );
                 const currentLibraryState = parsed.state.libraryState;
 
+                // Only change libraryState if it's not already set or if it's "uninitialized" but we have files
                 if (
                   !currentLibraryState ||
                   (currentLibraryState === "uninitialized" && hasFiles)
@@ -1074,11 +1121,13 @@ export function ControlPanelsAppComponent({
                   );
                 }
 
+                // Ensure the store version is current to prevent migration issues
                 if (!parsed.version || parsed.version < 5) {
                   parsed.version = 5;
                   hasChanges = true;
                 }
 
+                // Save if we made any changes
                 if (hasChanges || !currentLibraryState) {
                   parsed.state.items = items;
                   localStorage.setItem(persistedKey, JSON.stringify(parsed));
@@ -1098,11 +1147,13 @@ export function ControlPanelsAppComponent({
               }
             }
 
+            // If this was an old backup, migrate IndexedDB content from filename keys to UUID keys
             if (isOldBackupFormat && fileUUIDMap.size > 0) {
               console.log(
                 `[Restore] Migrating ${fileUUIDMap.size} files from filename to UUID keys...`
               );
 
+              // Migrate documents
               const docsTransaction = db.transaction("documents", "readwrite");
               const docsStore = docsTransaction.objectStore("documents");
 
@@ -1113,11 +1164,13 @@ export function ControlPanelsAppComponent({
                     getRequest.onsuccess = async () => {
                       const content = getRequest.result;
                       if (content) {
+                        // Save with UUID key
                         await new Promise<void>((res, rej) => {
                           const putRequest = docsStore.put(content, uuid);
                           putRequest.onsuccess = () => res();
                           putRequest.onerror = () => rej(putRequest.error);
                         });
+                        // Delete old filename key
                         await new Promise<void>((res, rej) => {
                           const deleteRequest = docsStore.delete(filename);
                           deleteRequest.onsuccess = () => res();
@@ -1140,6 +1193,7 @@ export function ControlPanelsAppComponent({
                 }
               }
 
+              // Migrate images
               const imagesTransaction = db.transaction("images", "readwrite");
               const imagesStore = imagesTransaction.objectStore("images");
 
@@ -1150,11 +1204,13 @@ export function ControlPanelsAppComponent({
                     getRequest.onsuccess = async () => {
                       const content = getRequest.result;
                       if (content) {
+                        // Save with UUID key
                         await new Promise<void>((res, rej) => {
                           const putRequest = imagesStore.put(content, uuid);
                           putRequest.onsuccess = () => res();
                           putRequest.onerror = () => rej(putRequest.error);
                         });
+                        // Delete old filename key
                         await new Promise<void>((res, rej) => {
                           const deleteRequest = imagesStore.delete(filename);
                           deleteRequest.onsuccess = () => res();
@@ -1177,6 +1233,7 @@ export function ControlPanelsAppComponent({
                 }
               }
 
+              // Clear any migration flag to ensure migration doesn't run again
               localStorage.setItem(
                 "ryos:indexeddb-uuid-migration-v1",
                 "completed"
@@ -1191,12 +1248,14 @@ export function ControlPanelsAppComponent({
               err
             );
 
+            // Emergency fallback: ensure library state is set to prevent auto-init even on error
             try {
               const persistedKey = "ryos:files";
               const raw = localStorage.getItem(persistedKey);
               if (raw) {
                 const parsed = JSON.parse(raw);
                 if (parsed && parsed.state) {
+                  // Check if we likely have restored data
                   const hasItems =
                     parsed.state.items &&
                     Object.keys(parsed.state.items).length > 0;
@@ -1210,6 +1269,7 @@ export function ControlPanelsAppComponent({
                   );
                 }
               } else {
+                // No files store exists, create one with "loaded" state to be safe
                 const defaultStore = {
                   state: { items: {}, libraryState: "loaded" },
                   version: 5,
@@ -1234,6 +1294,8 @@ export function ControlPanelsAppComponent({
         window.location.reload();
       } catch (err) {
         console.error("Backup restore failed:", err);
+
+        // Show more specific error message
         let errorMessage = "Failed to restore backup: ";
         if (err instanceof Error) {
           errorMessage += err.message;
@@ -1257,6 +1319,7 @@ export function ControlPanelsAppComponent({
   };
 
   const performFormat = async () => {
+    // Reset wallpaper to default before formatting
     setCurrentWallpaper("/wallpapers/videos/blue_flowers_loop.mp4");
     await formatFileSystem();
     setNextBootMessage("Formatting File System...");
@@ -1449,11 +1512,13 @@ export function ControlPanelsAppComponent({
                   </div>
                 </div>
 
+                {/* Volume controls separator */}
                 <hr
                   className="my-3 border-t"
                   style={tabStyles.separatorStyle}
                 />
 
+                {/* Vertical Volume Sliders - Mixer UI */}
                 <VolumeMixer
                   masterVolume={masterVolume}
                   setMasterVolume={setMasterVolume}
@@ -1539,7 +1604,7 @@ export function ControlPanelsAppComponent({
                   </Button>
                   <p className="text-[11px] text-gray-600 font-geneva-12">
                     This will clear all files (except sample docs), images, and
-                    custom wallpapers. ryOS will restart after format.
+                    custom wallpapers. JasCore will restart after format.
                   </p>
                 </div>
 
@@ -1630,8 +1695,8 @@ export function ControlPanelsAppComponent({
                       }
                     >
                       <SelectTrigger className="w-[120px]">
-                        <SelectValue placeholder="Select"/>
-                        </SelectTrigger>
+                        <SelectValue placeholder="Select" />
+                      </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="__null__">Default</SelectItem>
                         <SelectItem value="openai">OpenAI</SelectItem>
@@ -1749,14 +1814,14 @@ export function ControlPanelsAppComponent({
           onOpenChange={setIsConfirmResetOpen}
           onConfirm={handleConfirmReset}
           title="Reset All Settings"
-          description="Are you sure you want to reset all settings? This will clear all saved settings and restore default states. ryOS will restart after reset."
+          description="Are you sure you want to reset all settings? This will clear all saved settings and restore default states. JasCore will restart after reset."
         />
         <ConfirmDialog
           isOpen={isConfirmFormatOpen}
           onOpenChange={setIsConfirmFormatOpen}
           onConfirm={handleConfirmFormat}
           title="Format File System"
-          description="Are you sure you want to format the file system? This will permanently delete all documents (except sample documents), images, and custom wallpapers. ryOS will restart after format."
+          description="Are you sure you want to format the file system? This will permanently delete all documents (except sample documents), images, and custom wallpapers. JasCore will restart after format."
         />
         {/* The auth/login dialogs remain intact; UI section was removed */}
         <LoginDialog
