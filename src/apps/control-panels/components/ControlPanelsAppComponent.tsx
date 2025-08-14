@@ -264,8 +264,7 @@ export function ControlPanelsAppComponent({
 
   // Use auth hook (left intact; UI removed)
   const {
-    username,
-    authToken,
+      // keep (used by dialogs)
     promptSetUsername,
     isUsernameDialogOpen,
     setIsUsernameDialogOpen,
@@ -276,22 +275,24 @@ export function ControlPanelsAppComponent({
     isSettingUsername,
     usernameError,
     submitUsernameDialog,
-    promptVerifyToken,
+
+      // login dialog
     isVerifyDialogOpen,
     setVerifyDialogOpen,
     verifyPasswordInput,
     setVerifyPasswordInput,
     verifyUsernameInput,
     setVerifyUsernameInput,
-    hasPassword,
-    setPassword,
-    logout,
-    confirmLogout,
-    isLogoutConfirmDialogOpen,
-    setIsLogoutConfirmDialogOpen,
     isVerifyingToken,
     verifyError,
     handleVerifyTokenSubmit,
+
+    // password/logout dialog
+    hasPassword,
+    setPassword,
+    confirmLogout,
+    isLogoutConfirmDialogOpen,
+    setIsLogoutConfirmDialogOpen,
   } = useAuth();
 
   // Password dialog states
@@ -299,9 +300,6 @@ export function ControlPanelsAppComponent({
   const [passwordInput, setPasswordInput] = useState("");
   const [isSettingPassword, setIsSettingPassword] = useState(false);
   const [passwordError, setPasswordError] = useState<string | null>(null);
-
-  // Log out all devices state
-  const [isLoggingOutAllDevices, setIsLoggingOutAllDevices] = useState(false);
 
   React.useEffect(() => {
     console.log(
@@ -336,26 +334,6 @@ export function ControlPanelsAppComponent({
 
     setIsSettingPassword(false);
   };
-
-  const handleLogoutAllDevices = async () => {
-    setIsLoggingOutAllDevices(true);
-
-    try {
-      if (!authToken || !username) {
-        toast.error("Authentication Error", {
-          description: "No authentication token found",
-        });
-        return;
-      }
-
-      const response = await fetch("/api/chat-rooms?action=logoutAllDevices", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
-          "X-Username": username,
-        },
-      });
 
       const data = await response.json();
 
