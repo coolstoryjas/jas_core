@@ -1653,7 +1653,6 @@ export function ControlPanelsAppComponent({
                     >
                       <SelectTrigger className="w-[120px]">
                         <SelectValue placeholder="Select">
-                          {ttsModel || "Select"}
                         </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="__null__">Default</SelectItem>
