@@ -10,12 +10,6 @@ export interface Video {
 
 export const DEFAULT_VIDEOS: Video[] = [
   {
-    id: "0pP3ZjMDzF4",
-    url: "https://youtu.be/pA6CGuXEKtQ",
-    title: "How Smart Contracts Will Change the World",
-    artist: "Olga Mack",
-  },
-  {
     id: "EKBVLzOZyLw",
     url: "https://youtu.be/envMzAxCRbw",
     title: "A Love Letter to LA | Behind The Scenes",
@@ -86,6 +80,12 @@ export const DEFAULT_VIDEOS: Video[] = [
     url: "https://youtu.be/b_ZS5soVcxw?si=LPJPJhx1nkZCbhrb",
     title: "Gyre Intercom: CRAB",
     artist: "Meow Wolf",
+  },
+  {
+    id: "0pP3ZjMDzF4",
+    url: "https://youtu.be/pA6CGuXEKtQ",
+    title: "How Smart Contracts Will Change the World",
+    artist: "Olga Mack",
   },
   {
     id: "9AJ1oSXlzCo",
