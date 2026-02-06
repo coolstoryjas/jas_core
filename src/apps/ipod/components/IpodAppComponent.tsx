@@ -1719,7 +1719,6 @@ export function IpodAppComponent({
   }, []);
 
   const handlePlay = useCallback(() => {
-    console.log("[v0] handlePlay called");
     // Always sync playing state when ReactPlayer reports a play event.
     setIsPlaying(true);
     if (!skipOperationRef.current) {
@@ -1729,7 +1728,6 @@ export function IpodAppComponent({
   }, [isPlaying, setIsPlaying, showStatus]);
 
   const handlePause = useCallback(() => {
-    console.log("[v0] handlePause called");
     // Always sync playing state when ReactPlayer reports a pause.
     // This unconditional update prevents the app state from getting
     // stuck in "play" when Mobile Safari blocks autoplay.

@@ -2,7 +2,7 @@
   "videos": [
     {
       "id": "VMh8hsUCD3g",
-      "url": "https://www.youtube.com/watch?v=3hqP72nwFyE&list=RD3hqP72nwFyE&start_radio=1",
+      "url": "https://www.youtube.com/watch?v=3hqP72nwFyE",
       "title": "The Inside Man (Soopasoul Remix)",
       "artist": "Funky Destination",
       "lyricOffset": 1000
@@ -187,14 +187,14 @@
     },
     {
       "id": "yP8nAoFi6JY",
-      "url": "https://www.youtube.com/watch?v=fKKNPLowteY&list=RDfKKNPLowteY&start_radio=1",
+      "url": "https://www.youtube.com/watch?v=fKKNPLowteY",
       "title": "Remember Me",
       "artist": "ArtBlue Boy",
       "lyricOffset": 22400
     },
     {
       "id": "1FNI1i7H1Kc",
-      "url": "https://www.youtube.com/watch?v=x3DpLN38Fv8&list=RDx3DpLN38Fv8&start_radio=1",
+      "url": "https://www.youtube.com/watch?v=x3DpLN38Fv8",
       "title": "Tonight",
       "artist": "BoomBox",
       "lyricOffset": -6600
@@ -208,7 +208,7 @@
     },
     {
       "id": "AGaTzDTnYGY",
-      "url": "https://www.youtube.com/watch?v=O6jR2bpzveg&list=RDO6jR2bpzveg&start_radio=1",
+      "url": "https://www.youtube.com/watch?v=O6jR2bpzveg",
       "title": "Waiting Around",
       "artist": "BoomBox",
       "lyricOffset": 3350
@@ -229,21 +229,21 @@
     },
     {
       "id": "zt0Me5qyK4g",
-      "url": "https://www.youtube.com/watch?v=vWJj-JPWYZ8&list=RDvWJj-JPWYZ8&start_radio=1",
+      "url": "https://www.youtube.com/watch?v=vWJj-JPWYZ8",
       "title": "Scuba",
       "artist": "Tukan",
       "lyricOffset": 2200
     },
     {
       "id": "T6YVgEpRU6Q",
-      "url": "https://www.youtube.com/watch?v=85nEeF40YIg&list=RD85nEeF40YIg&start_radio=1",
+      "url": "https://www.youtube.com/watch?v=85nEeF40YIg",
       "title": "Prove your Love (Instrumental Version)",
       "artist": "Misumami & First Touch",
       "lyricOffset": -5050
     },
     {
       "id": "QiYOkmrI1jg",
-      "url": "https://www.youtube.com/watch?v=m-bIUJiL04E&list=RDm-bIUJiL04E&start_radio=1",
+      "url": "https://www.youtube.com/watch?v=m-bIUJiL04E",
       "title": "Basic Instinct",
       "artist": "Jimmy Whoo",
       "lyricOffset": 1250
@@ -264,14 +264,14 @@
     },
     {
       "id": "6vDi9S2ZDYA",
-      "url": "https://www.youtube.com/watch?v=rXwsppHZloU&list=RDrXwsppHZloU&start_radio=1",
+      "url": "https://www.youtube.com/watch?v=rXwsppHZloU",
       "title": "Hold It",
       "artist": "Flamingo Pier",
       "lyricOffset": -4000
     },
     {
       "id": "5tcBJCouOmE",
-      "url": "https://www.youtube.com/watch?v=KrdHFkfOpJw&list=RDKrdHFkfOpJw&start_radio=1",
+      "url": "https://www.youtube.com/watch?v=KrdHFkfOpJw",
       "title": "Super Fresh ",
       "artist": "vbnd",
       "lyricOffset": 19400
@@ -299,7 +299,7 @@
     },
     {
       "id": "hJ9Wp3PO3c8",
-      "url": "https://www.youtube.com/watch?v=2C29r956v40&list=RD2C29r956v40&start_radio=1",
+      "url": "https://www.youtube.com/watch?v=2C29r956v40",
       "title": "Amor",
       "artist": "Emmanuel Cortes",
       "lyricOffset": -6900
