@@ -270,7 +270,10 @@ export const useIpodStore = create<IpodState>()(
             historyPosition: newShuffleState ? -1 : state.historyPosition,
           };
         }),
-      togglePlay: () => set((state) => ({ isPlaying: !state.isPlaying })),
+      togglePlay: () => set((state) => {
+        console.log("[v0] togglePlay - current isPlaying:", state.isPlaying, "-> will toggle to:", !state.isPlaying);
+        return { isPlaying: !state.isPlaying };
+      }),
       setIsPlaying: (playing) => set({ isPlaying: playing }),
       toggleVideo: () => set((state) => ({ showVideo: !state.showVideo })),
       toggleBacklight: () =>

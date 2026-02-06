@@ -412,6 +412,11 @@ export function IpodScreen({
   isFullScreen,
   lyricsControls,
 }: IpodScreenProps) {
+  // Debug log for playback state
+  useEffect(() => {
+    console.log("[v0] IpodScreen - isPlaying:", isPlaying, "currentTrack:", currentTrack?.title, "isFullScreen:", isFullScreen);
+  }, [isPlaying, currentTrack, isFullScreen]);
+
   // Animation variants for menu transitions
   const menuVariants = {
     enter: (direction: "forward" | "backward") => ({
@@ -623,8 +628,14 @@ export function IpodScreen({
               onEnded={!isFullScreen ? handleTrackEnd : undefined}
               onProgress={!isFullScreen ? handleProgress : undefined}
               onDuration={!isFullScreen ? handleDuration : undefined}
-              onPlay={!isFullScreen ? handlePlay : undefined}
-              onPause={!isFullScreen ? handlePause : undefined}
+              onPlay={!isFullScreen ? (...args) => {
+                console.log("[v0] ReactPlayer onPlay event triggered");
+                handlePlay(...args);
+              } : undefined}
+              onPause={!isFullScreen ? (...args) => {
+                console.log("[v0] ReactPlayer onPause event triggered");
+                handlePause(...args);
+              } : undefined}
               onReady={!isFullScreen ? handleReady : undefined}
               loop={loopCurrent}
               volume={finalIpodVolume}
